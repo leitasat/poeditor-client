@@ -42,4 +42,14 @@ Language.prototype.export = function(options) {
     });
 };
 
+Language.prototype.update = function(terms) {
+    var payload = Array.isArray(terms) ? terms : [terms];
+    var data = JSON.stringify(payload);
+
+    var params = Object.assign({},{ action: 'update_language', id: this.__projectId, language: this.code, data: data });
+    return utils.call(this.__token, params).then(function(response) {
+        return response;
+    });
+};
+
 module.exports = Language;
